@@ -5,6 +5,7 @@ module.exports = class PanelAPI {
     constructor(app) {
         this.app = app;
         
+        
         this.app.get('/panel', checkAuthorized, (req, res, next)=>{
             next()
         })
@@ -15,10 +16,5 @@ module.exports = class PanelAPI {
             res.redirect("/notAllowed.html")
         }
 
-        this.app.use((error, req, res, next) => {
-            res.status(500).send(error.message)
-        })
-
-        //this.app.use(passport.session());
     }
 }

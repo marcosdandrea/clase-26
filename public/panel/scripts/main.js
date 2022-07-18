@@ -6,7 +6,7 @@ let messagesTemplates
 document.addEventListener("DOMContentLoaded", () => {
 
     console.log("documento cargado")
-
+    checkSession()
     fetch("http://localhost:8080/template/products.hbs")
         .then(res => res.text())
         .then(baseTemplate => {
@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 .then(res => res.text())
                 .then(baseTemplate => {
                     messagesTemplates = Handlebars.compile(baseTemplate)
-                    checkSession()
                     //initizalizeComponents()
                     //startListeners()
                     //getProducts()
@@ -30,6 +29,14 @@ document.addEventListener("DOMContentLoaded", () => {
             fetch(URL, {
                 method: 'POST'
             })
+            .then(response => {
+                if (response.redirected) {
+                    window.location.href = response.url;
+                }
+            })
+            .catch(function(err) {
+                console.info(err + " url: " + url);
+            });
         })
         
         
@@ -69,7 +76,7 @@ function checkSession() {
         if (!getCookie("username")) {
             clearInterval(check)
             alert("Su sesión se ha cerrado por inactividad")
-            location.replace("http://localhost:8080/login.html")
+            location.replace("/")
         }
     }, 5000)
 }

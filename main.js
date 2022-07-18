@@ -28,6 +28,12 @@ new PanelAPI(app)
 
 app.use("/", express.static(path.join(__dirname, '/public')))
 
+app.use((error, req, res, next) => {
+    res.status(500).send(error.message)
+    })
+
+app.use(passport.session());
+
 db.connect()
     .then(()=>{
         app.listen(PORT, () => {

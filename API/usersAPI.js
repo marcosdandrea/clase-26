@@ -1,9 +1,12 @@
 const passport = require("../security/passport")
+const cookieParser = require("cookie-parser")
+require("dotenv").config()
 
 module.exports = class UsersAPI {
 
     constructor(app) {
         this.app = app;
+        this.app.use (cookieParser())
 
         this.app.post("/auth/register",
             passport.authenticate("registration", { session: true }), (req, res, next) => {
@@ -14,39 +17,25 @@ module.exports = class UsersAPI {
 
         this.app.post("/auth/login",
             passport.authenticate("login", { session: true }), (req, res, next) => {
-                // login
+                const maxAge = parseInt(process.env.SESION_DURATION)
+                const cookieProperties = {maxAge}
+                res.cookie("username", req.user.username, cookieProperties )
+                res.status(200).redirect("/panel")
                 console.log ("usuario logueado:", req.user.username)
-                res.cookie("username", req.user.username)
-                res.send({redirect: "/panel"})
             });
 
         this.app.post('/auth/logout', 
-        (req, res) => {
-            console.log ("Cerrando sesion")
+        (req, res, next) => {
             if (req.user) {
+                console.log ("Cerrando sesion")
                 req.logout(function (err) {
                     if (err) return next(err);
-                    res.redirect("/panel")
+                    res.redirect("/")
                 });
             } else {
                 console.log("No hay ninguna sesión iniciada")
             }
             });
 
-        this.app.use((error, req, res, next) => {
-            res.status(500).send(error.message)
-            })
-
-        this.app.use(passport.session());
-        
-        this.app.get('/main', checkAuthorized, (req, res)=>{
-            res.send("Usted está autorizado a ver este sitio")
-        })
-
-        function checkAuthorized(req, res, next){
-            if (req.user?.level == "admin") 
-                return next()
-            res.send ("No está autorizado a ver este sitio")
-        }
     }
 }

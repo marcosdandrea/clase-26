@@ -74,17 +74,16 @@
                 headers: {
                     'Content-Type': 'application/json'
                 }
-
             })
-
                 .then(res => {
-                    if (res.status == 200) {                        
-                        res.json()
-                            .then(data => location.replace(data.redirect))
+                    if (res.status != 200) {
+                        alert("usuario o contraseña incorrectos")
+                        working.style = "display: none"
                         return;
                     }
-                    alert("usuario o contraseña incorrectos")
-                    working.style = "display: none"
+                    if (res.redirected) {
+                        window.location.href = res.url;
+                    }
 
                 })
         }
