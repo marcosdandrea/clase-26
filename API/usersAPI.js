@@ -21,7 +21,7 @@ module.exports = class UsersAPI {
                 const cookieProperties = {maxAge}
                 res.cookie("username", req.user.username, cookieProperties )
                 res.status(200).redirect("/panel")
-                console.log ("usuario logueado:", req.user.username)
+                console.log ("> Usuario logueado:", req.user.username)
             });
 
         this.app.post('/auth/logout', 

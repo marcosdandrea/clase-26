@@ -1,3 +1,4 @@
+
 let socket
 let uploader
 let productTemplates
@@ -15,9 +16,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 .then(res => res.text())
                 .then(baseTemplate => {
                     messagesTemplates = Handlebars.compile(baseTemplate)
-                    //initizalizeComponents()
-                    //startListeners()
-                    //getProducts()
+                    initizalizeComponents()
+                    startListeners()
+                    getProducts()
                 })
         })
         .catch((err) => {
@@ -88,13 +89,20 @@ function initizalizeComponents() {
 
 function getProducts() {
 
-    fetch("http://localhost:8080/api/productos/")
-        .then(products => {
-            console.log(products)
-            const context = JSON.parse(products);
-            const html = productTemplates({ products: context });
-            document.getElementById("hbsProducts").innerHTML = html;
+    fetch("http://localhost:8080/productos/")
+        .then(response => {
+            if (response.status != 200){
+                    console.log (response) 
+                    return
+                }
+                response.json()
+                .then(products => {
+                    console.log(products)
+                    const html = productTemplates({ products });
+                    document.getElementById("hbsProducts").innerHTML = html;
+            })        
         })
+        .catch(err => console.log(err))
 }
 
 function startListeners() {
