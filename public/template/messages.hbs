@@ -1,7 +1,8 @@
 {{#each messages}}
       <div class="messageRow">
-        <b class="messageFrom">{{this.author.id}}</b>
+        {{!-- <b class="messageFrom">{{this.author.id}}</b> --}}
+        <img src="{{this.author.profilePic}}">
         <p class="messageTime">({{this.author.alias}}):</p>
-        <i class="messageContent">{{this.text}}</i>
+        <i class="messageContent">{{this.text.content}}</i>
       </div>
 {{/each}}

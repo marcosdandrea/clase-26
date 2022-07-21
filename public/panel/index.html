@@ -13,8 +13,10 @@
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdn.jsdelivr.net/npm/normalizr@3.6.1/dist/normalizr.browser.min.js"></script>
   <script src="http://localhost:8080/panel/scripts/socket.io.min.js"></script>
-  <script src="http://localhost:8080/panel/scripts/client.min.js"></script>
+  <!-- <script src="http://localhost:8080/panel/scripts/client.min.js"></script> -->
   <script src="http://localhost:8080/panel/scripts/main.js" defer></script>
+  <script src="./scripts/clientProductsAPI.js" defer></script>
+  <script src="./scripts/clientMessagesAPI.js"></script>
   <title>Gestión de Productos</title>
 </head>
 
@@ -59,34 +61,6 @@
         <div class="inputContainer">
           <h3>Centro de Mensajes</h3>
           <h6 id="compressionRatio"></h6>
-        </div>
-        <div class="inputContainer">
-          <label for="inputEmail">Email</label>
-          <input class="form-control" type="email" name="" id="inputEmail" placeholder="correo@correo.com">
-        </div>
-        <div class="inputContainer">
-          <div class="inputContainer">
-            <label for="inputName">Nombre</label>
-            <input class="form-control" type="text" name="" id="inputName" placeholder="">
-          </div>
-          <div class="inputContainer">
-            <label for="inputSurname">Apellido</label>
-            <input class="form-control" type="text" name="" id="inputSurname" placeholder="">
-          </div>
-          <div class="inputContainer">
-            <label for="inputAge">Edad</label>
-            <input class="form-control" type="number" name="" id="inputAge" placeholder="">
-          </div>
-        </div>
-        <div class="inputContainer">
-          <div class="inputContainer">
-            <label for="inputAlias">Alias</label>
-            <input class="form-control" type="text" name="" id="inputAlias" placeholder="">
-          </div>
-          <div class="inputContainer">
-            <label for="inputAvatarURL">Avatar Image URL</label>
-            <input class="form-control" type="text" name="" id="inputAvatarURL" placeholder="">
-          </div>
         </div>
         <div id="hbsMessages">
 

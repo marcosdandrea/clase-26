@@ -12,7 +12,21 @@ passport.use("registration", new LocalStrategy(
         if (existentUser)
             return callback(new Error("Ya existe el usuario"))     
         const hashedPass = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
-        const newUser = {fullname: req.body.fullname, username, password: hashedPass, level: "admin" }
+        const { file } = req;
+
+        const birthday = (req.body.birthday).split("/")
+        const birthdayFormatted = birthday[1]+"/"+birthday[0]+"/"+birthday[2]
+
+        const newUser = {
+            fullname: req.body.fullname, 
+            username, 
+            password: hashedPass, 
+            birthday: birthdayFormatted,
+            alias: req.body.alias,
+            profilePic: file.filename,
+            level: "admin",
+         }
+         
         await userDatabase.save(newUser)
         callback(null, newUser)
     } catch (err) {

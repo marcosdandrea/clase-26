@@ -10,10 +10,10 @@
     <tbody>
       {{#each products}}
       <tr>
-        <td>{{this.productName}}</td>
-        <td>${{this.productPrice}}</td>
+        <td>{{this.title}}</td>
+        <td>${{this.price}}</td>
         <td>
-          <image src={{{this.productImage}}} style="height: 4rem;"></image>
+          <image src={{{this.image}}} style="height: 4rem;"></image>
         </td>
       </tr>
       {{/each}}

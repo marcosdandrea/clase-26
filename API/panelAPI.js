@@ -3,8 +3,7 @@ const passport = require("../security/passport")
 module.exports = class PanelAPI {
 
     constructor(app) {
-        this.app = app;
-        
+        this.app = app;        
         
         this.app.get('/panel', checkAuthorized, (req, res, next)=>{
             next()
