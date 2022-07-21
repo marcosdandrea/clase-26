@@ -24,6 +24,7 @@ const sendMessage = () => {
             text: JSON.stringify({ content, time })
         }
     )
+    updateSession();
     document.querySelector("#inputContent").value = "";
 }
 
@@ -57,8 +58,8 @@ function denormalizeMsg(input) {
     const denormalized = denormalize(input.result, [msgSchema], input.entities)
     const inputLength = JSON.stringify(input).length
     const denormalizedLength = JSON.stringify(denormalized).length
-    const compressRatio = (denormalizedLength * 100) / inputLength
-    document.querySelector("#compressionRatio").innerText = "Compression Ratio:" + compressRatio.toFixed(2) + "%"
+    const compressRatio = ((denormalizedLength * 100) / inputLength)-100
+    document.querySelector("#compressionRatio").innerText = "Compression Ratio: " + compressRatio.toFixed(2) + "%"
     return (denormalized)
 
 }
@@ -66,3 +67,9 @@ function denormalizeMsg(input) {
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("btnSendMessage").addEventListener("click", sendMessage)
 })
+
+function updateSession(){
+    const URL = "/auth/update"
+    fetch(URL)
+    .catch(error => console.log(error));
+}

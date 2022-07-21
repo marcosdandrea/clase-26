@@ -54,9 +54,11 @@ module.exports = class UsersAPI {
                 }
             });
         
-        this.app.get('auth/update', 
-            passport.authenticate("login", { session: true }), 
-            (req, res, next) => { next() })
+        this.app.get('/auth/update',  
+            (req, res, next) => { 
+                console.log ("> updating session")
+                res.status(200).send({session: "updated"}) 
+            })
 
     }
 }

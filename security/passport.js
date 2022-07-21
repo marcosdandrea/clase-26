@@ -40,7 +40,7 @@ passport.use("login", new LocalStrategy(
     try {
         const existentUser = await userDatabase.getUsername(username)
         if (!existentUser ||!bcrypt.compareSync(password, existentUser.password))
-            return callback(new Error ("Usuario o contraseña incorrectos"))       
+            return callback(new Error ("Usuario o contraseña incorrectos"))    
         callback(null, existentUser)
     } catch (err) {
         callback(new Error(err))

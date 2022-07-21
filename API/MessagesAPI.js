@@ -14,7 +14,6 @@ module.exports = class MessagesAPI{
             sendAllMessages();
 
             socket.on("newMessage", async (message)=>{
-                console.log (message)
                 try{
                     await messageDB.save(message)
                     sendAllMessages()                
